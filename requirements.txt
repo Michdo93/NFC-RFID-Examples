@@ -1,0 +1,29 @@
+# ============================================================
+# RFID/NFC → openHAB Steuerung
+# Python-Abhängigkeiten
+# ============================================================
+
+# PC/SC Smartcard-Interface (kommuniziert mit pcscd / ACR122U)
+pyscard>=2.0.7
+
+# openHAB REST API Client
+# Dokumentation: https://pypi.org/project/python-openhab-rest-client/
+# Import: from openhab import OpenHABClient, Items
+python-openhab-rest-client>=21.3.93
+
+# Optional: Für farbige Terminal-Ausgabe
+colorama>=0.4.6
+
+# ============================================================
+# System-Voraussetzungen (NICHT via pip, via apt installieren):
+# ============================================================
+# sudo apt install -y pcscd pcsc-tools swig python3-dev python3-pyscard
+#
+# Kernel-Module sperren (verhindert Konflikte mit pcscd):
+# echo "blacklist pn533_usb" | sudo tee /etc/modprobe.d/blacklist-nfc.conf
+# echo "blacklist nfc" | sudo tee -a /etc/modprobe.d/blacklist-nfc.conf
+# sudo update-initramfs -u && sudo reboot
+#
+# Nach Reboot:
+# sudo systemctl enable pcscd && sudo systemctl start pcscd
+# pcsc_scan   ← Test ob Reader erkannt wird
